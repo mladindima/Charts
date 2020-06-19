@@ -4,6 +4,7 @@ namespace ConsoleTVs\Charts;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class ChartsServiceProvider extends ServiceProvider
 {
@@ -22,8 +23,8 @@ class ChartsServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/charts'),
         ], 'charts_views');
 
-        $this->app->register('Jenssegers\\Date\\DateServiceProvider');
-        $this->app->register('ConsoleTVs\\Support\\SupportServiceProvider');
+//        $this->app->register('Jenssegers\\Date\\DateServiceProvider');
+//        $this->app->register('ConsoleTVs\\Support\\SupportServiceProvider');
 
         $this->registerBladeDirectives();
     }
@@ -82,11 +83,11 @@ class ChartsServiceProvider extends ServiceProvider
         Blade::directive('set', function ($argumentString) {
             list($name, $value) = $this->getArguments($argumentString);
 
-            if (starts_with($name, ["'", '"']) || ends_with($name, ["'", '"'])) {
+            if (Str::endsWith($name, ["'", '"']) || Str::endsWith($name, ["'", '"'])) {
                 $name = substr($name, 1, -1);
             }
 
-            if (starts_with($value, ["'", '"']) || ends_with($value, ["'", '"'])) {
+            if (Str::endsWith($value, ["'", '"']) || Str::endsWith($value, ["'", '"'])) {
                 $value = substr($value, 1, -1);
             }
 

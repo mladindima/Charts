@@ -15,11 +15,13 @@ use ConsoleTVs\Charts\Builder\Url;
 use ConsoleTVs\Charts\Builder\Math;
 use ConsoleTVs\Charts\Builder\Chart;
 use ConsoleTVs\Charts\Builder\Multi;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use ConsoleTVs\Charts\Builder\Database;
 use ConsoleTVs\Charts\Builder\Realtime;
 use ConsoleTVs\Charts\Builder\MultiUrl;
 use ConsoleTVs\Charts\Builder\MultiDatabase;
+use Illuminate\Support\Str;
 
 /**
  * This is the charts facade class.
@@ -297,12 +299,12 @@ class Builder
      */
     private static function buildIncludeTags(array $data)
     {
-        return collect(array_flatten($data))->map(function ($item) {
-            if (ends_with($item, '.css')) {
+        return collect(Arr::flatten($data))->map(function ($item) {
+            if (Str::endsWith($item, '.css')) {
                 return '<link rel="stylesheet" href="'.$item.'">';
             }
 
-            if (ends_with($item, '.js') || strpos($item, 'http') !== false) {
+            if (Str::endsWith($item, '.js') || strpos($item, 'http') !== false) {
                 return '<script type="text/javascript" src="'.$item.'"></script>';
             }
 

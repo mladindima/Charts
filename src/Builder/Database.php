@@ -11,7 +11,8 @@
 
 namespace ConsoleTVs\Charts\Builder;
 
-use Jenssegers\Date\Date;
+//use Jenssegers\Date\Date;
+use Illuminate\Support\Carbon as Date;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 
